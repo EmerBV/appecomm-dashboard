@@ -20,7 +20,7 @@
     "zustand": "^4.4.6"
   },
   "scripts": {
-    "start": "vite --port 3000 --open",
+    "start": "vite --port 9091 --open",
     "build": "vite build",
     "test": "jest --watch --config=jest.config.js",
     "cy:open": "cypress open",
