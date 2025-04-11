@@ -6,6 +6,15 @@ export default defineConfig((configEnv) => {
 
 	return {
 		plugins: [react()],
+		server: {
+			port: 5173,
+			proxy: {
+				'/api': {
+					target: 'http://localhost:9091',
+					changeOrigin: true,
+				}
+			}
+		},
 		css: {
 			modules: {
 				generateScopedName: isDevelopment ? "[name]__[local]__[hash:base64:5]" : "[hash:base64:5]",
