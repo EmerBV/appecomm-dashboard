@@ -9,16 +9,14 @@ export default defineConfig((configEnv) => {
 		server: {
 			port: 5173,
 			proxy: {
-				'/api': {
+				'/ecommdb/api/v1': {
 					target: 'http://localhost:9091',
 					changeOrigin: true,
 				}
 			}
 		},
 		css: {
-			modules: {
-				generateScopedName: isDevelopment ? "[name]__[local]__[hash:base64:5]" : "[hash:base64:5]",
-			},
+			postcss: './postcss.config.js',
 		},
 	};
 });

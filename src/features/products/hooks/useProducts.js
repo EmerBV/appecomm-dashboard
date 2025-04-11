@@ -293,8 +293,39 @@ const useProducts = () => {
 
   // Load products on mount
   useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+    // Añadir una bandera para prevenir múltiples intentos
+    let isMounted = true;
+    
+    const fetchData = async () => {
+      try {
+        const data = await productService.getProducts();
+        if (isMounted) {
+          setProducts(data);
+          setError(null);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err.message || 'Failed to load products');
+          // Solo mostrar el toast una vez
+          toast.error('Failed to load products', { id: 'products-error' });
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+    
+    setIsLoading(true);
+    fetchData();
+    
+    // Cleanup function
+    return () => {
+      isMounted = false;
+    };
+    
+    // Elimina loadProducts de las dependencias
+  }, [toast]);
 
   return {
     products,

@@ -19,7 +19,12 @@ const useToast = () => {
    * @param {Object} options - Additional toast options
    */
   const error = (message, options = {}) => {
-    toast.error(message, options);
+    // Añadir un ID basado en el mensaje para prevenir duplicados
+    const id = options.id || `error-${message}`;
+    // Verificar si ya existe este toast
+    if (!toast.isActive(id)) {
+      toast.error(message, { ...options, id });
+    }
   };
 
   /**

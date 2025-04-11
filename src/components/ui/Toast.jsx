@@ -7,7 +7,13 @@ const Toast = ({ position = 'top-right', toastOptions }) => {
       position={position}
       toastOptions={{
         // Default options
+        id: (t) => t.message,  // Usa el mensaje como ID único
+
         duration: 4000,
+        custom: {
+          preventDuplicates: true,
+          maxToasts: 5  // Limitar el número máximo de toasts
+        },
         style: {
           borderRadius: '8px',
           background: '#fff',

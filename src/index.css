@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './assets/styles/sakura.scss';
+
 @layer base {
     html {
         -webkit-tap-highlight-color: transparent;

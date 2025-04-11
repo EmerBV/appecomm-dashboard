@@ -14,6 +14,14 @@ const productService = {
       return response.data.data || [];
     } catch (error) {
       console.error('Error fetching products:', error);
+      
+      // No reintentes si el error es 4xx (cliente)
+      if (error.response && error.response.status >= 400 && error.response.status < 500) {
+        throw error;
+      }
+      
+      // Para errores de servidor, puedes implementar un sistema de reintentos limitados
+      // pero no lo hagas en un useEffect sin control
       throw error;
     }
   },
